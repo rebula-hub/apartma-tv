@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="slideshow" id="slideshow"></div>
+  <div class="slideshow slideshow-next" id="slideshow-next"></div>
+  <div class="slideshow-label" id="slideshow-label"></div>
+
+  <main class="dashboard">
+
+    <div class="side-panel">
+      <aside class="weather-panel" id="weather-panel">
+        <div class="weather-loading" id="weather-loading">Loading…</div>
+        <div class="weather-current" id="weather-current" style="display:none">
+          <div class="weather-icon" id="weather-icon"></div>
+          <div class="weather-temp" id="weather-temp"></div>
+          <div class="weather-desc" id="weather-desc"></div>
+          <div class="weather-row">
+            <div class="weather-stat"><span class="weather-stat-label">Humidity</span><span class="weather-stat-val" id="weather-humidity"></span></div>
+            <div class="weather-stat"><span class="weather-stat-label">Wind</span><span class="weather-stat-val" id="weather-wind"></span></div>
+            <div class="weather-stat"><span class="weather-stat-label">Feels like</span><span class="weather-stat-val" id="weather-feels"></span></div>
+          </div>
+          <div class="weather-location" id="weather-location"></div>
+        </div>
+        <div class="weather-forecast" id="weather-forecast"></div>
+      </aside>
+
+      <div class="lang-bubble" id="lang-bubble">
+        <span class="lang-label">Language</span>
+        <button class="lang-current" id="lang-current" onclick="toggleLangMenu()">English</button>
+        <div class="lang-menu" id="lang-menu" style="display:none"></div>
+      </div>
+    </div>
+
+    <div class="greeting">
+      <h1 id="greeting-text">Welcome!</h1>
+      <p class="greeting-sub" id="greeting-sub">We're happy you're here. Enjoy your stay!</p>
+    </div>
+
+    <div class="cards" id="cards-container"></div>
+
+  </main>
+
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal">
+      <button class="modal-close" id="modal-close">&times;</button>
+      <div class="modal-content" id="modal-content"></div>
+    </div>
+  </div>
+
+  <script src="configs.js"></script>
+  <script src="i18n.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

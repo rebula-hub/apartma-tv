@@ -1,0 +1,92 @@
+name: Fetch iCal Bookings
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+    - cron: "5 11 * * *"
+  workflow_dispatch:
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch all iCal feeds
+        run: |
+          python3 << 'EOF'
+          import re, json, urllib.request
+
+          # Preberi configs.js in izlušči vse iCal URL-je z ID-ji
+          with open("configs.js") as f:
+              config = f.read()
+
+          apartments = []
+          for m in re.finditer(r"id:\s*(\d+).*?icalUrl:\s*['\"](.+?)['\"]", config, re.DOTALL):
+              apt_id = int(m.group(1))
+              url = m.group(2)
+              apartments.append((apt_id, url))
+
+          all_bookings = {}
+
+          for apt_id, url in apartments:
+              print(f"Fetching apartment {apt_id}: {url}")
+              try:
+                  req = urllib.request.Request(url, headers={"User-Agent": "GitHub-Action"})
+                  with urllib.request.urlopen(req, timeout=15) as resp:
+                      raw = resp.read().decode("utf-8")
+              except Exception as e:
+                  print(f"  ERROR: {e}")
+                  continue
+
+              bookings = []
+              for block in raw.split("BEGIN:VEVENT")[1:]:
+                  end = block.find("END:VEVENT")
+                  vevent = block[:end] if end != -1 else block
+
+                  def prop(name):
+                      m = re.search(rf"^{name}(;.*?)?:(.+)$", vevent, re.M)
+                      if not m:
+                          return None
+                      return m.group(2).strip()
+
+                  dtstart = prop("DTSTART")
+                  dtend = prop("DTEND")
+                  summary = prop("SUMMARY")
+
+                  if not dtstart or not dtend or not summary:
+                      continue
+                  if summary == "Not available":
+                      continue
+
+                  name = summary.split(",")[0].strip()
+                  bookings.append({
+                      "name": name,
+                      "start": dtstart[:8],
+                      "end": dtend[:8]
+                  })
+
+              bookings.sort(key=lambda b: b["start"])
+              all_bookings[str(apt_id)] = bookings
+              print(f"  → {len(bookings)} bookings")
+
+          with open("bookings.json", "w") as f:
+              json.dump(all_bookings, f, ensure_ascii=False, indent=2)
+
+          total = sum(len(b) for b in all_bookings.values())
+          print(f"Done: {total} total bookings across {len(all_bookings)} apartments")
+          EOF
+
+      - name: Commit if changed
+        run: |
+          if git diff --exit-code bookings.json; then
+            echo "No changes, skipping commit"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add bookings.json
+            git commit -m "Update bookings.json [skip ci]"
+            git push
+          fi
