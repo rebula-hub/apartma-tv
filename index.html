@@ -17,8 +17,11 @@
       <aside class="weather-panel" id="weather-panel">
         <div class="weather-loading" id="weather-loading">Loading…</div>
         <div class="weather-current" id="weather-current" style="display:none">
-          <div class="weather-icon" id="weather-icon"></div>
-          <div class="weather-temp" id="weather-temp"></div>
+          <div class="weather-location" id="weather-location"></div>
+          <div class="weather-main">
+            <div class="weather-temp" id="weather-temp"></div>
+            <div class="weather-icon" id="weather-icon"></div>
+          </div>
           <div class="weather-desc" id="weather-desc"></div>
           <div class="weather-row">
             <div class="weather-stat"><span class="weather-stat-label">Humidity</span><span class="weather-stat-val" id="weather-humidity"></span></div>
@@ -29,12 +32,12 @@
         </div>
         <div class="weather-forecast" id="weather-forecast"></div>
       </aside>
+    </div>
 
-      <div class="lang-bubble" id="lang-bubble">
-        <span class="lang-label">Language</span>
-        <button class="lang-current" id="lang-current" onclick="toggleLangMenu()">English</button>
-        <div class="lang-menu" id="lang-menu" style="display:none"></div>
-      </div>
+    <div class="lang-bubble" id="lang-bubble">
+      <span class="lang-label">Language</span>
+      <button class="lang-current" id="lang-current" onclick="toggleLangMenu()">English</button>
+      <div class="lang-menu" id="lang-menu" style="display:none"></div>
     </div>
 
     <div class="greeting">

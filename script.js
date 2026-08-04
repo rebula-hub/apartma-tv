@@ -79,7 +79,6 @@ function showInitial() {
   div.style.backgroundImage = `url(galerija/${encodeURI(file)})`;
   div.style.opacity = "1";
   document.getElementById("slideshow-label").textContent = formatLabel(file);
-  detectBrightness(file);
 }
 
 function nextSlide() {
@@ -96,7 +95,6 @@ function nextSlide() {
   slideshowIdx = nextIdx;
   slideshowActive = !slideshowActive;
   document.getElementById("slideshow-label").textContent = formatLabel(file);
-  detectBrightness(file);
 }
 
 function detectBrightness(file) {
@@ -116,9 +114,10 @@ function detectBrightness(file) {
 }
 
 function formatLabel(filename) {
-  const name = filename.replace(/\.[^.]+$/, "");
+  let name = filename.replace(/\.[^.]+$/, "");
+  name = name.replace(/^\d+[-_\s]*/, "");
   return name
-    .replace(/[-_]+/g, " ")
+    .replace(/_/g, " ")
     .replace(/\s+/g, " ")
     .trim()
     .replace(/\b\w/g, c => c.toUpperCase());
@@ -422,6 +421,8 @@ function launchApp(packageName) {
 
 // ---------- Vreme (Open-Meteo API, brezplačno) ----------
 
+let currentWeatherCode = null;
+
 const WEATHER_CODES = {
   0: { icon: "☀️", label: "Jasno" },
   1: { icon: "🌤️", label: "Pretežno jasno" },
@@ -454,7 +455,12 @@ const WEATHER_CODES = {
 };
 
 function getWeatherIcon(code) {
-  return WEATHER_CODES[code] || { icon: "❓", label: "Neznano" };
+  return WEATHER_CODES[code] || { icon: "❓" };
+}
+
+function getWeatherLabel(code) {
+  const codes = LANG[currentLang]?.weatherCodes || LANG.en.weatherCodes;
+  return codes[code] || "Unknown";
 }
 
 function getDayName(idx) {
@@ -485,12 +491,13 @@ function renderCurrentWeather(current) {
   document.getElementById("weather-loading").style.display = "none";
   const panel = document.getElementById("weather-current");
   panel.style.display = "";
+  currentWeatherCode = current.weather_code;
   updateWeatherLabels();
 
   const w = getWeatherIcon(current.weather_code);
   document.getElementById("weather-icon").textContent = w.icon;
   document.getElementById("weather-temp").textContent = `${Math.round(current.temperature_2m)}°`;
-  document.getElementById("weather-desc").textContent = w.label;
+  document.getElementById("weather-desc").textContent = getWeatherLabel(current.weather_code);
   document.getElementById("weather-humidity").textContent = `${current.relative_humidity_2m}%`;
   document.getElementById("weather-wind").textContent = `${current.wind_speed_10m} km/h`;
   document.getElementById("weather-feels").textContent = `${Math.round(current.apparent_temperature)}°`;

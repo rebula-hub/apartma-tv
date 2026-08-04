@@ -8,6 +8,9 @@ const ICONS = {
   guide: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-3-5-8-9-8-14a8 8 0 1 1 16 0c0 5-5 9-8 14z"/><circle cx="12" cy="7" r="2.5"/></svg>`,
   washing: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="3.5"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><path d="M7 7v-2M12 7v-2M17 7v-2" stroke-linecap="round"/></svg>`,
   apps: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="7" height="7" rx="1.5"/><rect x="2.5" y="14.5" width="7" height="7" rx="1.5"/><rect x="14.5" y="2.5" width="7" height="7" rx="1.5"/><rect x="14.5" y="14.5" width="7" height="7" rx="1.5"/></svg>`,
+  netflix: `<svg width="32" height="32" viewBox="0 0 24 24" fill="#E50914"><path d="M5.5 3h3l5 13.5L15.5 7 18 3h3l-7 18h-3.5z"/></svg>`,
+  youtube: `<svg width="32" height="32" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#FF0000"/><polygon points="13,10 13,22 23,16" fill="white"/></svg>`,
+  spotify: `<svg width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="15" fill="#1DB954"/><circle cx="16" cy="16" r="11" fill="none" stroke="white" stroke-width="2"/></svg>`,
 };
 
 const APARTMENTS = [
@@ -23,9 +26,9 @@ const APARTMENTS = [
     },
     weather: { lat: 45.5475, lon: 13.7308 },
     apps: [
-      { name: "Netflix", icon: "🎬", package: "com.netflix.ninja" },
-      { name: "YouTube", icon: "▶️", package: "com.google.android.youtube.tv" },
-      { name: "Spotify", icon: "🎵", package: "com.spotify.tv.android" },
+      { name: "Netflix", icon: ICONS.netflix, package: "com.netflix.ninja" },
+      { name: "YouTube", icon: ICONS.youtube, package: "com.google.android.youtube.tv" },
+      { name: "Spotify", icon: ICONS.spotify, package: "com.spotify.tv.android" },
     ],
     guideBook: `
       <h3>Local Recommendations</h3>
