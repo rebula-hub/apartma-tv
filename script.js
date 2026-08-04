@@ -404,18 +404,17 @@ function buildAppsContent() {
 }
 
 function launchApp(packageName) {
-  // Fully Kiosk API (deluje na TV-ju)
-  if (typeof fully !== "undefined" && fully.startApplication) {
-    fully.startApplication(packageName);
+  const fk = typeof fully !== "undefined" ? fully : (typeof window.fully !== "undefined" ? window.fully : null);
+
+  if (fk && typeof fk.startApplication === "function") {
+    fk.startApplication(packageName);
     return;
   }
 
-  // Poskusi z intent:// (fallback)
-  const intentUrl = `intent://#Intent;package=${packageName};end`;
   try {
-    window.location.href = intentUrl;
+    window.location.href = "intent://#Intent;package=" + packageName + ";end";
   } catch (e) {
-    console.warn("Zagon aplikacije ni mogoč:", e);
+    console.warn("App launch failed:", e);
   }
 }
 
