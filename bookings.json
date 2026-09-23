@@ -1,11 +1,6 @@
 {
   "1": [
     {
-      "name": "Annette Krohn",
-      "start": "20260920",
-      "end": "20260923"
-    },
-    {
       "name": "Yuan-Kai Chiang",
       "start": "20260923",
       "end": "20260926"
@@ -24,6 +19,11 @@
       "name": "Nasser Polin",
       "start": "20261001",
       "end": "20261004"
+    },
+    {
+      "name": "",
+      "start": "20261004",
+      "end": "20261008"
     },
     {
       "name": "Angela Maglio",
