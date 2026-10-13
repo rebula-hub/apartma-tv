@@ -1,11 +1,6 @@
 {
   "1": [
     {
-      "name": "Simona motolese",
-      "start": "20261011",
-      "end": "20261013"
-    },
-    {
       "name": "",
       "start": "20261013",
       "end": "20261014"
@@ -24,6 +19,11 @@
       "name": "Blaze Petrov",
       "start": "20261017",
       "end": "20261019"
+    },
+    {
+      "name": "",
+      "start": "20261019",
+      "end": "20261023"
     },
     {
       "name": "Istvan Nemeth",
