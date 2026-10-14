@@ -1,11 +1,6 @@
 {
   "1": [
     {
-      "name": "",
-      "start": "20261013",
-      "end": "20261014"
-    },
-    {
       "name": "Jimmy Arabit",
       "start": "20261014",
       "end": "20261016"
@@ -29,6 +24,11 @@
       "name": "Istvan Nemeth",
       "start": "20261023",
       "end": "20261026"
+    },
+    {
+      "name": "Erna Van Ek",
+      "start": "20261026",
+      "end": "20261030"
     },
     {
       "name": "Bakovic Marko",
