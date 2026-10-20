@@ -1,16 +1,6 @@
 {
   "1": [
     {
-      "name": "Blaze Petrov",
-      "start": "20261017",
-      "end": "20261019"
-    },
-    {
-      "name": "Saad Shamim",
-      "start": "20261019",
-      "end": "20261020"
-    },
-    {
       "name": "Lou Dudouit",
       "start": "20261020",
       "end": "20261022"
@@ -54,6 +44,11 @@
       "name": "pietro ganci",
       "start": "20261205",
       "end": "20261207"
+    },
+    {
+      "name": "Fabiana Barra",
+      "start": "20261230",
+      "end": "20270102"
     }
   ],
   "2": [],
